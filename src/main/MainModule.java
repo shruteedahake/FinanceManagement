@@ -7,31 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import dao.FinanceRepositoryImpl;
+import entity.User;
 import util.DBConnUtil;
 import util.DBPropertyUtil;
 
 public class MainModule {
 
 	public static void main(String[] args) {
-
-		// String connectionString =
-		// DBPropertyUtil.getConnectionString("D:\\E\\Programming\\JAVA\\Shrutee\\finance\\src\\util\\Connection.properties");
-//		        if (connectionString == null) {
-//		            System.out.println("Failed to load database connection properties.");
-//		            return;
-//		        }
-//		        
-//		        Connection con = DBConnUtil.getConnection(connectionString);
-//		        Statement st;
-		// try {
-		// st = con.createStatement();
-		// ResultSet rs = st.executeQuery("select * from Users");
-		//
-		// while(rs.next())
-		// System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3));
-		// } catch (SQLException e) {
-		// e.printStackTrace();
-		// }
 
 		Scanner scanner = new Scanner(System.in);
 		boolean exit = false;
@@ -43,6 +26,7 @@ public class MainModule {
 			System.out.println("3. Expense Categorization");
 			System.out.println("4. Reports Generation");
 			System.out.println("5. Exit");
+			System.out.println("6. Add user");
 			System.out.print("Enter your choice: ");
 
 			int choice = scanner.nextInt();
@@ -50,6 +34,7 @@ public class MainModule {
 
 			switch (choice) {
 			case 1:
+				
 				authenticateUser();
 				break;
 			case 2:
@@ -63,6 +48,9 @@ public class MainModule {
 				break;
 			case 5:
 				exit = true;
+				break;
+			case 6:
+				addUser();
 				break;
 			default:
 				System.out.println("Invalid choice. Please try again.");
@@ -79,8 +67,8 @@ public class MainModule {
 		username = scanner.nextLine();
 
 		String query = "SELECT * FROM user WHERE username = ?";
-		String connectionString = DBPropertyUtil
-				.getConnectionString("D:\\Hexaware\\CASE Study\\FinanceManagement\\FinanceManagement\\src\\util\\Connection.properties");
+		String connectionString = DBPropertyUtil.getConnectionString(
+				"D:\\Hexaware\\CASE Study\\FinanceManagement\\src\\util\\Connection.properties");
 
 		try (Connection connection = DBConnUtil.getConnection(connectionString);
 				PreparedStatement statement = connection.prepareStatement(query)) {
@@ -103,6 +91,13 @@ public class MainModule {
 		// Add your code here
 	}
 
+	private static void addUser() {
+		User usr = new User();
+		FinanceRepositoryImpl obj = new FinanceRepositoryImpl();
+		
+		obj.createUser(usr);
+		
+	}
 	private static void categorizeExpenses() {
 		// Implement expense categorization functionality
 		System.out.println("Expense Categorization");
