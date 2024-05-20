@@ -1,36 +1,41 @@
 package entity;
 
-import java.util.Scanner;
-
 public class User {
 
-	private Scanner sc = new Scanner(System.in);
+	private int userId;
+	private String userName;
+	private String password;
+	private String email;
 
-	public int getUserID() {
-		System.out.println("Enter your userId: ");
-		int userID = sc.nextInt();
-
-		return userID;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getUsername() {
-		System.out.println("Enter your username: ");
-		String userName = sc.next();
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public String getUserName() {
 		return userName;
 	}
 
 	public String getPassword() {
-		System.out.println("Enter your password: ");
-		String password = sc.next();
-
 		return password;
 	}
 
 	public String getEmail() {
-		System.out.println("Enter your email: ");
-		String email = sc.next();
-
 		return email;
 	}
 
